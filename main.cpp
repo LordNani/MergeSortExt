@@ -7,6 +7,7 @@ void fillArray(int *pArr, size_t s) {
 	  cout << pArr[i] << endl;
   }
 }
+
 int main() {
   srand(time(0));
   int n = 0;
