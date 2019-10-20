@@ -1,59 +1,20 @@
 #include <iostream>
 #include <time.h>
+#include <stdio.h>
+#include "MergeSorter.h"
 using namespace std;
-void fillArray(int *pArr, size_t s) {
-  cout << "Unsorted array: ";
-  for (int i = 0; i < s; i++) {
-    pArr[i] = rand() % (2 * s);
-    cout << pArr[i] << ", ";
-  }
-}
-// TODO: clear memory
-
-int* mergeSort(int *pMain, size_t s) {
-  if (s < 2) {
-    return pMain;
-  }
-  size_t middle = s / 2;
-  int *pLeft = pMain;
-  int *pRight = pMain + middle; // may cause some troubles
-  return merge(mergeSort(pLeft, middle), middle,
-               mergeSort(pRight, s - middle + 1),
-               s - middle + 1); // aybe here + 0
-}
-
-int* merge(int *left, size_t l_length, int *right, size_t r_length) {
-  int i, j, m;
-  int *result = new int[l_length + r_length];
-  while (i < l_length && j < r_length) {
-    if (left[i] < right[j]) {
-      result[m] = left[i];
-      i++;
-    } else {
-      result[m] = right[j];
-      j++;
-    }
-    m++;
-  }
-  for (m; m < l_length + r_length; m++) {
-    while (i < l_length)
-      result[m] = left[i];
-    while (j < r_length)
-      result[m] = right[j];
-  }
-  return result;
-}
 
 int main() {
   srand(time(0));
   int n = 0;
   cout << "Enter the N (array length): " << endl;
   cin >> n;
-  int *mainArr = new int[n];
-  int *resultArr = new int[n];
 
+  int *mainArr = new int[n] {};
+  int *resultArr = new int[n] {};
   fillArray(mainArr, static_cast<size_t>(n));
   resultArr = mergeSort(mainArr, static_cast<size_t>(n));
+
   cout << "RESULT ARR: ";
   for (int i = 0; i < n; i++) {
     cout << resultArr[i] << ", ";
